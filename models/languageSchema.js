@@ -9,7 +9,7 @@ const languageSchema = new mongoose.Schema(
         year: {String},
         logo: {String},
 	}, {
-		reviews: [reviewSchema]
+		reviews: [commentSchema]
 	},
 	{
 		timestamps: true

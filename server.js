@@ -34,7 +34,7 @@ db.on( 'open', () =>{
 const router = require('./controllers/languages')
 app.use('/languages', router)
 
-app.use("../languages.js", languages)
+
 
 app.get('/', (req,res) => {
     res.send('does it work??')

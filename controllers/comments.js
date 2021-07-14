@@ -1,14 +1,13 @@
-// controllers/reviews.js
+
 const express = require('express')
 const router = express.Router()
 
-// require restaurant model
 const Language = require('./../models/languages')
 
-// CREATE
-// POST /reviews/
+
 router.post('/', (req, res, next) => {
-  // get the review data from the body of the request
+    console.log('we hit the route')
+ 
   const reviewData = req.body
 
   const LanguageId = reviewData.LanguageId

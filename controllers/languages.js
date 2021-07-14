@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { Error } = require('mongoose');
+const Language = require('../models/languageSchema')
 
-// INDEX
-// /languages/
-// retrieves all the languages from the database
+
 router.get('/', async (req, res) => {
 	try {
 		const languages = await Language.find();
@@ -14,19 +13,17 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// SHOW
-// /languages/id
-// show individual language
-router.get('/:id', async (req, res) => {
+
+router.put('/:id', async (req, res) => {
 	try {
-		const language = await Language.findById(req.params.id);
+		const language = await Language.findByIdAndUpdate(req.params.id);
         res.json(language);
 	} catch (err) {
 		console.error(err);
 	}
 });
 
-// POST 
+
 router.post('/', async (req,res) =>{
     try{
         const newLanguage = await Language.create(req.body);
@@ -36,7 +33,7 @@ router.post('/', async (req,res) =>{
     }
 })
 
-//UPDATE
+
 router.patch('/:id', async(req,res)=>{
     try{
         const newLanguage = await Language.findByIdAndUpdate(req.params.id,req.body,{new:true});
@@ -46,7 +43,7 @@ router.patch('/:id', async(req,res)=>{
     }
 })
 
-//DELETE
+
 router.delete('/:id', async(req,res)=>{
     try{
         const newLanguage = await Language.findByIdAndDelete(req.params.id);
