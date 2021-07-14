@@ -31,8 +31,8 @@ db.on( 'open', () =>{
 })
 
 //=============================Routes
-app.get('/', (req,res)=>{
-    res.send('we are live')
+app.use('/controllers/languages',()=>{
+    res.json(languages)
 })
 
 
