@@ -4,7 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose')
 const cors = require('cors')
 const PORT = process.env.PORT || 4000
-
+const languages = require('./controllers/languages')
 
 
 
@@ -31,9 +31,15 @@ db.on( 'open', () =>{
 })
 
 //=============================Routes
-app.use('/controllers/languages',()=>{
-    res.json(languages)
+const router = require('./controllers/languages')
+app.use('/languages', router)
+
+app.use("../languages.js", languages)
+
+app.get('/', (req,res) => {
+    res.send('does it work??')
 })
+
 
 
 //=============================Start Server

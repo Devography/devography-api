@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Bookmark = require('./Language');
+const { Error } = require('mongoose');
 
 // INDEX
 // /languages/
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST 
-router.post('/', async(req,res)=>{
+router.post('/', async (req,res) =>{
     try{
         const newLanguage = await Language.create(req.body);
         res.status(201).json(newLanguage);
@@ -37,7 +37,7 @@ router.post('/', async(req,res)=>{
 })
 
 //UPDATE
-router.put('/:id', async(req,res)=>{
+router.patch('/:id', async(req,res)=>{
     try{
         const newLanguage = await Language.findByIdAndUpdate(req.params.id,req.body,{new:true});
         res.status(201).json(newLanguage);
@@ -56,3 +56,4 @@ router.delete('/:id', async(req,res)=>{
     }
 })
 
+module.exports = router
