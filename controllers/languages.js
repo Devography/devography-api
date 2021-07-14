@@ -25,3 +25,33 @@ router.get('/:id', async (req, res) => {
 		console.error(err);
 	}
 });
+
+// POST 
+router.post('/', async(req,res)=>{
+    try{
+        const newLanguage = await Language.create(req.body);
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
+})
+
+//UPDATE
+router.put('/:id', async(req,res)=>{
+    try{
+        const newLanguage = await Language.findByIdAndUpdate(req.params.id,req.body,{new:true});
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
+})
+
+//DELETE
+router.delete('/:id', async(req,res)=>{
+    try{
+        const newLanguage = await Language.findByIdAndDelete(req.params.id);
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
+})
