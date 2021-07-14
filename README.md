@@ -6,5 +6,3 @@
 
 // this is an update from Trieu
 # devography-api
-
-//hello from mohammed's machine 
