@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 4000
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-///// MONGO ATLAS CONNECTOR
+
 const monogURI = process.env.DATABASE_URL;
 const db = mongoose.connection;
 
@@ -31,8 +31,8 @@ db.on( 'open', () =>{
 })
 
 //=============================Routes
-app.get('/', (req,res)=>{
-    res.send('we are live')
+app.use('/controllers/languages',()=>{
+    res.json(languages)
 })
 
 
