@@ -35,6 +35,7 @@ db.on( 'open', () =>{
 const langRouter = require('./controllers/languages')
 app.use('/languages', langRouter)
 
+
 const comRouter = require('./controllers/comments')
 app.use('/comments', comRouter)
 

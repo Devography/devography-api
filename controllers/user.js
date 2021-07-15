@@ -3,15 +3,24 @@ const router = express.Router();
 const User = require('../models/User');
 
 router.get('/', (req, res, next) => {
-  User.find({})
+  User.findById(req.params.id)
     .then((users) => res.json(users))
     .catch(next);
 });
-router.post('/', (req, res, next) => {
-  User.create(req.body)
-    .then((user) => res.status(201).json(user))
-    .catch(next);
+
+router.get('/', async (req, res) => {
+	try {
+		const languages = await Language.find();
+		res.json(languages);
+	} catch (err) {
+		console.error(err);
+	}
 });
+router.post('/', async (req,res) =>{
+    console.log(req.body)
+   const newLanguage = await Language.create(req.body)
+   res.json(newLanguage)
+})
 router.delete('/:id', async(req,res)=>{
     try{
         const newLanguage = await Language.findByIdAndDelete(req.params.id);

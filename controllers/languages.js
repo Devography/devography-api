@@ -12,7 +12,14 @@ router.get('/', async (req, res) => {
 		console.error(err);
 	}
 });
-
+router.get('/:id', async (req, res) => {
+	try {
+		const languages = await Language.findById(req.params.id);
+		res.json(languages);
+	} catch (err) {
+		console.error(err);
+	}
+});
 
 router.put('/:id', async (req, res) => {
 	try {
@@ -25,23 +32,12 @@ router.put('/:id', async (req, res) => {
 
 
 router.post('/', async (req,res) =>{
-    try{
-        const newLanguage = await Language.create(req.body);
-        res.status(201).json(newLanguage);
-    } catch (err){
-        console.log(err)
-    }
+    console.log(req.body)
+   const newLanguage = await Language.create(req.body)
+   res.json(newLanguage)
 })
 
 
-router.patch('/:id', async(req,res)=>{
-    try{
-        const newLanguage = await Language.findByIdAndUpdate(req.params.id,req.body,{new:true});
-        res.status(201).json(newLanguage);
-    } catch (err){
-        console.log(err)
-    }
-})
 
 
 router.delete('/:id', async(req,res)=>{
