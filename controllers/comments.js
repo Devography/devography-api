@@ -2,57 +2,56 @@
 const express = require('express')
 const router = express.Router()
 
-const Language = require('./../models/languages')
+const Language = require('../models/languageSchema')
 
 
-router.post('/', (req, res, next) => {
-    console.log('we hit the route')
- 
-  const reviewData = req.body
+router.get('/', async (req, res) => {
+	try {
+		const languages = await Language.find();
+		res.json(languages);
+	} catch (err) {
+		console.error(err);
+	}
+});
 
-  const LanguageId = reviewData.LanguageId
 
-  Language.findById(LanguageId)
-    .then(Language => {
-      // add review to Language
-      Language.reviews.push(reviewData)
-      // save Language
-      return Language.save()
-    })
-    // send responsne back to client
-    .then(Language => res.status(201).json({Language: Language}))
-    .catch(next)
+router.put('/:id', async (req, res) => {
+	try {
+		const language = await Language.findByIdAndUpdate(req.params.id);
+        res.json(language);
+	} catch (err) {
+		console.error(err);
+	}
+});
+
+
+router.post('/', async (req,res) =>{
+    try{
+        const newLanguage = await Language.create(req.body);
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
 })
 
-// DESTROY
-// DELETE /reviews/:id
-router.delete('/:id', (req, res, next) => {
-  const id = req.params.id
-  Language.findOne({ 'reviews._id': id })
-    .then(Language => {
-      Language.reviews.id(id).remove()
-      return Language.save()
-    })
-    .then(() => res.sendStatus(204))
-    .catch(next)
+
+router.patch('/:id', async(req,res)=>{
+    try{
+        const newLanguage = await Language.findByIdAndUpdate(req.params.id,req.body,{new:true});
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
 })
 
-// UPDATE
-// PATCH /reviews/:id
-router.patch('/:id', (req, res, next) => {
-  const id = req.params.id
-  const reviewData = req.body
 
-  Language.findOne({
-    'reviews._id': id,
-  })
-    .then(Language => {
-      const review = Language.reviews.id(id)
-      review.set(reviewData)
-      return Language.save()
-    })
-    .then(() => res.sendStatus(204))
-    .catch(next)
+router.delete('/:id', async(req,res)=>{
+    try{
+        const newLanguage = await Language.findByIdAndDelete(req.params.id);
+        res.status(201).json(newLanguage);
+    } catch (err){
+        console.log(err)
+    }
 })
 
 module.exports = router

@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const PORT = process.env.PORT || 4000
 const languages = require('./controllers/languages')
+const comments = require('./controllers/comments')
+const user = require('./controllers/user')
 
 
 
@@ -17,24 +19,27 @@ app.use(express.urlencoded({ extended: true }))
 const monogURI = process.env.DATABASE_URL;
 const db = mongoose.connection;
 
-//to get rid of depreciation warnings write the following
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
 db.on('error', (err) => console.log(err.message + ' is Mongodb not running?'));
-db.on('connected', () => console.log('mongo connected: ',monogURI));
+db.on('connected', () => console.log('mongo connected: ', "get 2 work"));
 db.on("disconnected", () => console.log('mongo disconnected'));
 db.on( 'open', () =>{
     console.log("connection made")
 })
 
 //=============================Routes
-const router = require('./controllers/languages')
-app.use('/languages', router)
+const langRouter = require('./controllers/languages')
+app.use('/languages', langRouter)
 
+const comRouter = require('./controllers/comments')
+app.use('/comments', comRouter)
 
+const userRouter = require('./controllers/user')
+app.use('/user', userRouter)
 
 app.get('/', (req,res) => {
     res.send('does it work??')
