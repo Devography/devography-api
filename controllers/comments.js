@@ -1,6 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const { Error } = require('mongoose');
+
+const express = require('express')
+const router = express.Router()
+
 const Language = require('../models/languageSchema')
 
 
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
 		console.error(err);
 	}
 });
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
 	try {
 		const languages = await Language.findById(req.params.id);
 		res.json(languages);
@@ -20,6 +21,7 @@ router.get('/:id', async (req, res) => {
 		console.error(err);
 	}
 });
+
 
 router.put('/:id', async (req, res) => {
 	try {
