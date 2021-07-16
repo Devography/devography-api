@@ -47,7 +47,7 @@ router.put('/:id', (req, res, next) => {
 // 	}
 // });
 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
 	try{
         const commentData = req.body
 		const language = await Language.findById(req.params.id) 
