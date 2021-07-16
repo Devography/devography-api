@@ -6,7 +6,7 @@ const cors = require('cors')
 const PORT = process.env.PORT || 4000
 const languages = require('./controllers/languages')
 const comments = require('./controllers/comments')
-const user = require('./controllers/user')
+
 
 
 
@@ -39,8 +39,6 @@ app.use('/languages', langRouter)
 const comRouter = require('./controllers/comments')
 app.use('/comments', comRouter)
 
-const userRouter = require('./controllers/user')
-app.use('/user', userRouter)
 
 app.get('/', (req,res) => {
     res.send('does it work??')
