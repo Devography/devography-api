@@ -28,7 +28,7 @@ router.post('/:id', async (req, res) => {
 	try{
         const commentData = req.body
 		const language = await Language.findById(req.params.id) 
-        language.comments.push(commentData);
+        language.comments.unshift(commentData);
         const updatedComment = await language.save();
 		res.status(201).json(updatedComment);
 	}catch(err){
