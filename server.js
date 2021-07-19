@@ -44,7 +44,9 @@ app.get('/', (req,res) => {
     res.send('does it work??')
 })
 
-
+app.get('/', (req,res) => {
+    res.redirect('/languages')
+})
 
 //=============================Start Server
 app.listen(PORT, () => {
